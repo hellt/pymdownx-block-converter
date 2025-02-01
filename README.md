@@ -10,7 +10,7 @@ The new syntax improves the readability of the markdown source and allows for mo
 
 **Limitations**:
 
-1. The script doesn't handle **nested** tabs convertation at this moment.
+1. The script doesn't handle **nested** tabs conversion at this moment.
 2. The script doesn't handle details blocks defined as `!!!+` at this moment.
 
 ## Usage

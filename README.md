@@ -1,4 +1,4 @@
-# pymdowx-block-converter
+# pymdownx-block-converter
 
 PyMdown Extension v9.10+ introduces a new way to define [blocks](https://facelessuser.github.io/pymdown-extensions/extensions/blocks/), which you might know under the following names:
 

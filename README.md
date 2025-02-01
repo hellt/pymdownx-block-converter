@@ -8,7 +8,7 @@ PyMdown Extension v9.10+ introduces a new way to define [blocks](https://faceles
 
 The new syntax improves the readability of the Markdown source and allows for more flexibility. However, you might already have a lot of Markdown files that use the old syntax.
 
-This repo contains a [script](main.py) created by [@tiangolo](https://github.com/tiangolo) to update Markdown block syntax (per [sqlmodel#712](https://github.com/fastapi/sqlmodel/pull/712) and [sqlmodel#713](https://github.com/fastapi/sqlmodel/pull/713)). Additionally, this script is packaged in a container allowing conversion from the old block syntax to the new one across your entire documentation base or just a single file.
+This repo contains a [script](main.py) created by [@tiangolo](https://github.com/tiangolo) to update Markdown block syntax (per [sqlmodel#712](https://github.com/fastapi/sqlmodel/pull/712), [sqlmodel#713](https://github.com/fastapi/sqlmodel/pull/713), and [pymdown-extensions#1973](https://github.com/facelessuser/pymdown-extensions/discussions/1973)). Additionally, this script is packaged in a container allowing conversion from the old block syntax to the new one across your entire documentation base or just a single file.
 
 **Limitations**:
 

@@ -4,6 +4,7 @@ from pathlib import Path
 # huge thanks to tiangolo for this script
 # https://github.com/tiangolo/sqlmodel/pull/712
 # https://github.com/tiangolo/sqlmodel/pull/713
+# https://github.com/facelessuser/pymdown-extensions/discussions/1973#discussioncomment-7697040
 
 
 def update_admonition():

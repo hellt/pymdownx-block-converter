@@ -17,7 +17,9 @@ This repo contains a [script](main.py) created by [@tiangolo](https://github.com
 
 ## Usage
 
-It is always a good idea to first run the script against a single file to see if it works as expected. To do so, run the following command:
+It is always a good idea to first run the script against a single file to see if it works as expected.
+
+To do so, run the following command:
 
 ```bash
 sudo docker run --rm -v $(pwd)/path/to/file.md:/docs/test.md \

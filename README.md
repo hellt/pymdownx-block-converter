@@ -6,7 +6,7 @@ PyMdown Extension v9.10+ introduces a new way to define [blocks](https://faceles
 * details
 * tabs
 
-The new syntax improves the readability of the markdown source and allows for more flexibility. However, you might already have a lot of markdown files that use the old syntax. This repo contains a [script](main.py) by @tiangolo packaged in a container that converts the old syntax to the new one across all your doc base or just a single file.
+The new syntax improves the readability of the markdown source and allows for more flexibility. However, you might already have a lot of markdown files that use the old syntax. This repo contains a [script](main.py) by [@tiangolo](https://github.com/tiangolo) packaged in a container that converts the old syntax to the new one across all your doc base or just a single file.
 
 **Limitations**:
 

@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
+from pathlib import Path
 import re
 import sys
-from pathlib import Path
 
 # huge thanks to tiangolo for the initial version of this script
 # https://github.com/tiangolo/sqlmodel/pull/712
@@ -76,7 +76,17 @@ def update_tabs(content):
 
 
 if __name__ == "__main__":
-    md_files = list(Path("/docs").glob("**/*.md"))
+    try:
+        target = sys.argv[1]
+
+        if Path(target).is_file():
+            md_files = [Path(target)]
+        # must be a directory, right?
+        else:
+            md_files = list(Path(target).glob("**/*.md"))
+    except IndexError:
+        # backward compatible with initial container configuration
+        md_files = list(Path("/docs").glob("**/*.md"))
 
     for md_file in md_files:
         content = md_file.read_text()

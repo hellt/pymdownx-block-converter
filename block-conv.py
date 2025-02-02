@@ -44,7 +44,9 @@ def update_details():
             assert m
             summary = m.group(1).strip()
             sub_content_internal = content[start.end() : end.start()].strip()
-            sub_content_no_summary = re.sub(re_str, "", sub_content_internal).strip()
+            sub_content_no_summary = re.sub(
+                re_str, "", sub_content_internal
+            ).strip()
             new_sub_content = (
                 f"/// details | {summary}\n\n{sub_content_no_summary}\n\n///"
             )

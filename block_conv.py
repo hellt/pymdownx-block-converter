@@ -39,15 +39,18 @@ def update_details(content):
     all_ends = re.finditer("</details>", content)
     for start, end in zip(all_starts, all_ends):
         sub_content = content[start.start() : end.end()]
+
         m = re.search(re_str, sub_content)
-        assert m
-        summary = m.group(1).strip()
+        summary = f" | {m.group(1).strip()}" if m else ""
+
         sub_content_internal = content[start.end() : end.start()].strip()
+
         sub_content_no_summary = re.sub(
             re_str, "", sub_content_internal
         ).strip()
+
         new_sub_content = (
-            f"/// details | {summary}\n{sub_content_no_summary}\n///"
+            f"/// details{summary}\n{sub_content_no_summary}\n///"
         )
 
         new_content = new_content.replace(sub_content, new_sub_content)

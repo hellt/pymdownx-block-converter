@@ -47,7 +47,7 @@ def update_details(content):
             re_str, "", sub_content_internal
         ).strip()
         new_sub_content = (
-            f"/// details | {summary}\n\n{sub_content_no_summary}\n\n///"
+            f"/// details | {summary}\n{sub_content_no_summary}\n///"
         )
 
         new_content = new_content.replace(sub_content, new_sub_content)

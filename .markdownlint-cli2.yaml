@@ -2,6 +2,7 @@
 default: true
 
 config:
+  no-inline-html: false
 
 globs:
   - '*.{md,markdown}'

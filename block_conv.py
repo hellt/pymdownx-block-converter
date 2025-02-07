@@ -26,8 +26,9 @@ def update_admonition(content):
         return result
 
     new_content = re.sub(re_str, replace, content)
+    new_content = new_content.strip() + "\n"
 
-    return new_content.strip()
+    return new_content
 
 
 def update_details(content):
@@ -74,8 +75,9 @@ def update_tabs(content):
         return result
 
     new_content = re.sub(re_str, replace, content)
+    new_content = new_content.strip() + "\n"
 
-    return new_content.strip()
+    return new_content
 
 
 if __name__ == "__main__":

@@ -2,7 +2,10 @@
 default: true
 
 config:
+  # Old style details blocks have HTML tags
   no-inline-html: false
+  # Testing whitespace stripping in details_no_summary
+  no-trailing-spaces: false
 
 globs:
   - '*.{md,markdown}'

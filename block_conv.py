@@ -120,6 +120,7 @@ if __name__ == "__main__":
 
         content = update_admonition(content)
         content = update_details(content)
+        content = update_details_question_marks(content)
         content = update_tabs(content)
 
         md_file.write_text(content)

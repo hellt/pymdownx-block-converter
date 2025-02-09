@@ -16,14 +16,14 @@ def update_block(content, re_str):
         block = match.group("content")
         deindented_block = re.sub(r"^ {4}", "", block, flags=re.MULTILINE)
 
-        question_mark = True if r"\?{3}" in re_str else False
+        question_marks = True if re.match(r"\\\?\{3\}", re_str) else False
 
-        result = "/// details" if question_mark else f"/// {type_}"
+        result = "/// details" if question_marks else f"/// {type_}"
 
         if title:
             result += f" | {title}"
 
-        if question_mark:
+        if question_marks:
             result += f"\n    type: {type_}"
 
         result += f"\n{deindented_block.strip()}\n"

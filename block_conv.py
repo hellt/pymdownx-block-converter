@@ -16,7 +16,7 @@ def update_block(content, re_str):
         block = match.group("content")
         deindented_block = re.sub(r"^ {4}", "", block, flags=re.MULTILINE)
 
-        question_mark = True if r'\?{3}' in re_str else False
+        question_mark = True if r"\?{3}" in re_str else False
 
         result = "/// details" if question_mark else f"/// {type_}"
 

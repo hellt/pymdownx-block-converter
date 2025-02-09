@@ -46,7 +46,10 @@ class TestTab(unittest.TestCase):
         with open(f"{path}/{name}_expected.md") as fh:
             expected_text = fh.read()
 
-        self.assertEqual(block_conv.update_details_question_marks(text), expected_text)
+        self.assertEqual(
+            block_conv.update_details_question_marks(text), expected_text
+        )
+
 
 if __name__ == "__main__":
     unittest.main()

@@ -35,6 +35,18 @@ class TestTab(unittest.TestCase):
 
         self.assertEqual(block_conv.update_details(text), expected_text)
 
+    def test_details_question_marks(self):
+        """Convert details with question marks instead of HTML tags"""
+        name = "details_question_marks"
+        path = f"tests/{name}"
+
+        with open(f"{path}/{name}.md") as fh:
+            text = fh.read()
+
+        with open(f"{path}/{name}_expected.md") as fh:
+            expected_text = fh.read()
+
+        self.assertEqual(block_conv.update_details_question_marks(text), expected_text)
 
 if __name__ == "__main__":
     unittest.main()

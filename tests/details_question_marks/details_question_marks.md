@@ -1,7 +1,7 @@
-# Admonition Blocks with question marks
+# Details Blocks with question marks
 
 ??? info
     Info using question marks
 
-??? note
+??? note "With a Summary"
     A note using question marks

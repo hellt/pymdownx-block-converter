@@ -9,21 +9,23 @@ import sys
 # https://github.com/facelessuser/pymdown-extensions/discussions/1973#discussioncomment-7697040
 
 
-def update_admonition(content):
-    # https://regex101.com/r/8CWkrH/1
-    re_str = (
-        r"(!|\?){3}\s*(?P<type>[^\n\s\"]*)\s*(\"(?P<title>[^\n\"]*)\")?\n"
-        r"(?P<content>(\n|    .*)*)\n*"
-    )
-
+def update_block(content, re_str):
     def replace(match: re.Match):
         type_ = match.group("type")
         title = match.group("title")
         block = match.group("content")
         deindented_block = re.sub(r"^ {4}", "", block, flags=re.MULTILINE)
-        result = f"/// {type_}"
+
+        question_mark = True if r'\?{3}' in re_str else False
+
+        result = "/// details" if question_mark else f"/// {type_}"
+
         if title:
             result += f" | {title}"
+
+        if question_mark:
+            result += f"\n    type: {type_}"
+
         result += f"\n{deindented_block.strip()}\n"
         result += "///\n\n"
         return result
@@ -31,6 +33,25 @@ def update_admonition(content):
     new_content = re.sub(re_str, replace, content)
 
     return new_content.strip() + "\n"
+
+
+def update_admonition(content):
+    # https://regex101.com/r/8CWkrH/1
+    re_str = (
+        r"!!!\s*(?P<type>[^\n\s\"]*)\s*(\"(?P<title>[^\n\"]*)\")?\n"
+        r"(?P<content>(\n|    .*)*)\n*"
+    )
+
+    return update_block(content, re_str)
+
+
+def update_details_question_marks(content):
+    re_str = (
+        r"\?{3}\s*(?P<type>[^\n\s\"]*)\s*(\"(?P<title>[^\n\"]*)\")?\n"
+        r"(?P<content>(\n|    .*)*)\n*"
+    )
+
+    return update_block(content, re_str)
 
 
 def update_details(content):

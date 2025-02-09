@@ -11,7 +11,7 @@ class TestTab(unittest.TestCase):
 
     def test_details_with_summary(self):
         """Convert details blocks (with a summary)"""
-        name = "details"
+        name = "details_html"
         path = f"tests/{name}"
 
         with open(f"{path}/{name}.md") as fh:

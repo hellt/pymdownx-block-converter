@@ -59,7 +59,7 @@ def update_details(content):
 
     new_content = content
 
-    all_starts = re.finditer("<details>", content)
+    all_starts = re.finditer(r"<details(\s+open.*)?>", content)
     all_ends = re.finditer("</details>", content)
     for start, end in zip(all_starts, all_ends):
         sub_content = content[start.start() : end.end()]
@@ -74,7 +74,9 @@ def update_details(content):
         ).strip()
 
         new_sub_content = (
-            f"/// details{summary}\n{sub_content_no_summary}\n///"
+            f"/// details{summary}\n"
+            f"{'    open: True\n' if 'open' in start.group() else ''}"
+            f"{sub_content_no_summary}\n///"
         )
 
         new_content = new_content.replace(sub_content, new_sub_content)

@@ -48,6 +48,22 @@ class TestAdmonition(unittest.TestCase):
 
         self.assertEqual(block_conv.update_admonition(text), expected_text)
 
+    def test_admonition_question_marks(self):
+        """
+        Convert admonitions with question marks instead of exclamation
+        marks
+        """
+        name = "admonition_question_marks"
+        path = f"tests/{name}"
+
+        with open(f"{path}/{name}.md") as fh:
+            text = fh.read()
+
+        with open(f"{path}/{name}_expected.md") as fh:
+            expected_text = fh.read()
+
+        self.assertEqual(block_conv.update_admonition(text), expected_text)
+
 
 if __name__ == "__main__":
     unittest.main()

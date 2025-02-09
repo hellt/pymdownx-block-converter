@@ -11,7 +11,7 @@ import sys
 
 def update_admonition(content):
     # https://regex101.com/r/8CWkrH/1
-    re_str = r"!!!\s*(?P<type>[^\n\s\"]*)\s*(\"(?P<title>[^\n\"]*)\")?\n(?P<content>(\n|    .*)*)\n*"
+    re_str = r"(!|\?){3}\s*(?P<type>[^\n\s\"]*)\s*(\"(?P<title>[^\n\"]*)\")?\n(?P<content>(\n|    .*)*)\n*"
 
     def replace(match: re.Match):
         type_ = match.group("type")

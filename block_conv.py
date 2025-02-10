@@ -16,7 +16,9 @@ def update_block(content, re_str):
         block = match.group("content")
         deindented_block = re.sub(r"^ {4}", "", block, flags=re.MULTILINE)
 
-        question_marks = True if re.match(r"\\\?\{3\}", re_str) else False
+        m = re.match(r"\?{3}(?P<open>\+)?", match.group())
+        question_marks = True if m else False
+        open_ = m.group("open")
 
         result = "/// details" if question_marks else f"/// {type_}"
 
@@ -25,6 +27,9 @@ def update_block(content, re_str):
 
         if question_marks:
             result += f"\n    type: {type_}"
+
+        if open_:
+            result += "\n    open: True"
 
         result += f"\n{deindented_block.strip()}\n"
         result += "///\n\n"
@@ -47,7 +52,7 @@ def update_admonition(content):
 
 def update_details_question_marks(content):
     re_str = (
-        r"\?{3}\s*(?P<type>[^\n\s\"]*)\s*(\"(?P<title>[^\n\"]*)\")?\n"
+        r"\?{3}\+?\s*(?P<type>[^\n\s\"]*)\s*(\"(?P<title>[^\n\"]*)\")?\n"
         r"(?P<content>(\n|    .*)*)\n*"
     )
 

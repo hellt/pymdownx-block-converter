@@ -39,7 +39,7 @@ just a single file.
 It is always a good idea to first run the script against a single file to see if
 it works as expected.
 
-To do so, first determine whether to run the container or locally run the script:
+:sparkles: To do so, first determine whether to run the container or locally run the script:
 
 ### Container
 

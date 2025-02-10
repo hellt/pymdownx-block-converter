@@ -20,27 +20,60 @@ to update Markdown block syntax (per [sqlmodel#712](https://github.com/fastapi/s
 the old block syntax to the new one across your entire documentation base or
 just a single file.
 
+## Supported Syntax
+
+* Admonitions declared with `!!!`
+  * including those with varied spacing around the _type_
+* Details declared with HTML tags
+  * with and without &lt;summary/> tags
+* Details declared with `???`, including the open attribute with `???+`
+  * again, with and without a summary
+* Tabs with `===`
+
 **Limitations**:
 
 1. The script doesn't handle **nested** tabs conversion at this moment.
-2. The script doesn't handle details blocks defined as `!!!+` at this moment.
 
 ## Usage
 
 It is always a good idea to first run the script against a single file to see if
 it works as expected.
 
-To do so, run the following command:
+:sparkles: To do so, first determine whether to run the container or locally run
+the script:
+
+### Container
 
 ```bash
 sudo docker run --rm -v $(pwd)/path/to/file.md:/docs/test.md \
      ghcr.io/hellt/pymdownx-block-converter:0.1.0
 ```
 
-To convert the whole doc base that is typically contained in the `docs` folder,
-run the following command:
+To convert the whole documentation base that is typically contained in the
+`docs` folder, run the following command:
 
 ```bash
 sudo docker run --rm -v $(pwd)/docs:/docs \
      ghcr.io/hellt/pymdownx-block-converter:0.1.0
+```
+
+### Local Execution outside of container
+
+Local execution against a file:
+
+```bash
+python block_conv.py /path/to/test.md
+```
+
+Local execution against a directory (utilizes globbing):
+
+```bash
+python block_conv.py /path/to/
+```
+
+Running the script without a file or path argument runs against *.md in
+_/docs_ (to remain backwards compatible with the container's Dockerfile).
+
+```bash
+python block_conv.py
 ```

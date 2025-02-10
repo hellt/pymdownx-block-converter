@@ -9,18 +9,28 @@ import sys
 # https://github.com/facelessuser/pymdown-extensions/discussions/1973#discussioncomment-7697040
 
 
-def update_admonition(content):
-    # https://regex101.com/r/8CWkrH/1
-    re_str = r"!!!\s*(?P<type>[^\n\s\"]*)\s*(\"(?P<title>[^\n\"]*)\")?\n(?P<content>(\n|    .*)*)\n*"
-
+def update_block(content, re_str):
     def replace(match: re.Match):
         type_ = match.group("type")
         title = match.group("title")
         block = match.group("content")
         deindented_block = re.sub(r"^ {4}", "", block, flags=re.MULTILINE)
-        result = f"/// {type_}"
+
+        m = re.match(r"\?{3}(?P<open>\+)?", match.group())
+        question_marks = True if m else False
+        open_ = m.group("open") if m else None
+
+        result = "/// details" if question_marks else f"/// {type_}"
+
         if title:
             result += f" | {title}"
+
+        if question_marks:
+            result += f"\n    type: {type_}"
+
+        if open_:
+            result += "\n    open: True"
+
         result += f"\n{deindented_block.strip()}\n"
         result += "///\n\n"
         return result
@@ -30,12 +40,32 @@ def update_admonition(content):
     return new_content.strip() + "\n"
 
 
+def update_admonition(content):
+    # https://regex101.com/r/8CWkrH/1
+    re_str = (
+        r"!!!\s*(?P<type>[^\n\s\"]*)\s*(\"(?P<title>[^\n\"]*)\")?\n"
+        r"(?P<content>(\n|    .*)*)\n*"
+    )
+
+    return update_block(content, re_str)
+
+
+def update_details_question_marks(content):
+    re_str = (
+        r"\?{3}\+?\s*(?P<type>[^\n\s\"]*)\s*(\"(?P<title>[^\n\"]*)\")?\n"
+        r"(?P<content>(\n|    .*)*)\n*"
+    )
+
+    return update_block(content, re_str)
+
+
 def update_details(content):
     re_str = r"<summary>((\n|.)*)</summary>"
+    open_true_str = "    open: True\n"
 
     new_content = content
 
-    all_starts = re.finditer("<details>", content)
+    all_starts = re.finditer(r"<details(\s+open.*)?>", content)
     all_ends = re.finditer("</details>", content)
     for start, end in zip(all_starts, all_ends):
         sub_content = content[start.start() : end.end()]
@@ -50,7 +80,9 @@ def update_details(content):
         ).strip()
 
         new_sub_content = (
-            f"/// details{summary}\n{sub_content_no_summary}\n///"
+            f"/// details{summary}\n"
+            f"{open_true_str if 'open' in start.group() else ''}"
+            f"{sub_content_no_summary}\n///"
         )
 
         new_content = new_content.replace(sub_content, new_sub_content)
@@ -96,6 +128,7 @@ if __name__ == "__main__":
 
         content = update_admonition(content)
         content = update_details(content)
+        content = update_details_question_marks(content)
         content = update_tabs(content)
 
         md_file.write_text(content)

@@ -18,7 +18,7 @@ def update_block(content, re_str):
 
         m = re.match(r"\?{3}(?P<open>\+)?", match.group())
         question_marks = True if m else False
-        open_ = m.group("open")
+        open_ = m.group("open") if m else None
 
         result = "/// details" if question_marks else f"/// {type_}"
 
@@ -61,6 +61,7 @@ def update_details_question_marks(content):
 
 def update_details(content):
     re_str = r"<summary>((\n|.)*)</summary>"
+    open_true_str = '    open: True\n'
 
     new_content = content
 
@@ -80,7 +81,7 @@ def update_details(content):
 
         new_sub_content = (
             f"/// details{summary}\n"
-            f"{'    open: True\n' if 'open' in start.group() else ''}"
+            f"{open_true_str if 'open' in start.group() else ''}"
             f"{sub_content_no_summary}\n///"
         )
 

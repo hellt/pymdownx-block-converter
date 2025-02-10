@@ -48,7 +48,7 @@ sudo docker run --rm -v $(pwd)/path/to/file.md:/docs/test.md \
      ghcr.io/hellt/pymdownx-block-converter:0.1.0
 ```
 
-To convert the whole doc base that is typically contained in the `docs` folder,
+To convert the whole documentation base that is typically contained in the `docs` folder,
 run the following command:
 
 ```bash

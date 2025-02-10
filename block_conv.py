@@ -61,7 +61,7 @@ def update_details_question_marks(content):
 
 def update_details(content):
     re_str = r"<summary>((\n|.)*)</summary>"
-    open_true_str = '    open: True\n'
+    open_true_str = "    open: True\n"
 
     new_content = content
 

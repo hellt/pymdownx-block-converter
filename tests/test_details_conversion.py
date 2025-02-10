@@ -9,7 +9,7 @@ class TestTab(unittest.TestCase):
         # full diff output
         self.maxDiff = None
 
-    def test_details_with_summary(self):
+    def test_details_html_with_summary(self):
         """Convert HTML details blocks (with a summary)"""
         name = "details_html"
         path = f"tests/{name}"
@@ -35,7 +35,7 @@ class TestTab(unittest.TestCase):
 
         self.assertEqual(block_conv.update_details(text), expected_text)
 
-    def test_details_without_summary(self):
+    def test_details_html_without_summary(self):
         """Convert HTML details blocks without a summary"""
         name = "details_no_summary"
         path = f"tests/{name}"

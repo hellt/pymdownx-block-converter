@@ -39,7 +39,8 @@ just a single file.
 It is always a good idea to first run the script against a single file to see if
 it works as expected.
 
-:sparkles: To do so, first determine whether to run the container or locally run the script:
+:sparkles: To do so, first determine whether to run the container or locally run
+the script:
 
 ### Container
 
@@ -48,8 +49,8 @@ sudo docker run --rm -v $(pwd)/path/to/file.md:/docs/test.md \
      ghcr.io/hellt/pymdownx-block-converter:0.1.0
 ```
 
-To convert the whole documentation base that is typically contained in the `docs` folder,
-run the following command:
+To convert the whole documentation base that is typically contained in the
+`docs` folder, run the following command:
 
 ```bash
 sudo docker run --rm -v $(pwd)/docs:/docs \

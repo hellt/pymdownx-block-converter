@@ -10,7 +10,8 @@ some more text with a summary
 Breaking News! The Earth is round. ;-)
 ///
 
-<!--- since open is a boolean, with it present at all the details block is open! --->
+<!--- since open is a boolean, with it present at all the details block is open!
+--->
 /// details | Secret
     open: True
 Well it isn't a secret anymore with this open...

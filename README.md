@@ -23,11 +23,11 @@ just a single file.
 ## Supported Syntax
 
 * Admonitions declared with `!!!`
-   * including those with varying spacing around the _type_
+  * including those with varying spacing around the _type_
 * Details declared with HTML tags
-   * with and without &lt;summary/> tags
+  * with and without &lt;summary/> tags
 * Details declared with `???` including the open attribute with `???+`
-   * again, with and without a summary
+  * again, with and without a summary
 * Tabs with `===`
 
 **Limitations**:

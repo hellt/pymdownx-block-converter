@@ -16,7 +16,9 @@ def update_block(content, re_str):
         block = match.group("content")
         deindented_block = re.sub(r"^ {4}", "", block, flags=re.MULTILINE)
 
-        question_marks = True if re.match(r"\\\?\{3\}", re_str) else False
+        m = re.match(r"\?{3}(?P<open>\+)?", match.group())
+        question_marks = True if m else False
+        open_ = m.group("open") if m else None
 
         result = "/// details" if question_marks else f"/// {type_}"
 
@@ -25,6 +27,9 @@ def update_block(content, re_str):
 
         if question_marks:
             result += f"\n    type: {type_}"
+
+        if open_:
+            result += "\n    open: True"
 
         result += f"\n{deindented_block.strip()}\n"
         result += "///\n\n"
@@ -47,7 +52,7 @@ def update_admonition(content):
 
 def update_details_question_marks(content):
     re_str = (
-        r"\?{3}\s*(?P<type>[^\n\s\"]*)\s*(\"(?P<title>[^\n\"]*)\")?\n"
+        r"\?{3}\+?\s*(?P<type>[^\n\s\"]*)\s*(\"(?P<title>[^\n\"]*)\")?\n"
         r"(?P<content>(\n|    .*)*)\n*"
     )
 
@@ -56,10 +61,11 @@ def update_details_question_marks(content):
 
 def update_details(content):
     re_str = r"<summary>((\n|.)*)</summary>"
+    open_true_str = "    open: True\n"
 
     new_content = content
 
-    all_starts = re.finditer("<details>", content)
+    all_starts = re.finditer(r"<details(\s+open.*)?>", content)
     all_ends = re.finditer("</details>", content)
     for start, end in zip(all_starts, all_ends):
         sub_content = content[start.start() : end.end()]
@@ -74,7 +80,9 @@ def update_details(content):
         ).strip()
 
         new_sub_content = (
-            f"/// details{summary}\n{sub_content_no_summary}\n///"
+            f"/// details{summary}\n"
+            f"{open_true_str if 'open' in start.group() else ''}"
+            f"{sub_content_no_summary}\n///"
         )
 
         new_content = new_content.replace(sub_content, new_sub_content)

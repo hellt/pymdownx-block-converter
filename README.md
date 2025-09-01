@@ -44,22 +44,31 @@ the script:
 
 ### Container
 
+To volume mount a specific file and fallback to pattern matching _/docs/*.md_:
+
 ```bash
 sudo docker run --rm -v $(pwd)/path/to/file.md:/docs/test.md \
      ghcr.io/hellt/pymdownx-block-converter:0.1.0
 ```
 
 To convert the whole documentation base that is typically contained in the
-`docs` folder, run the following command:
+`docs` folder (uses fallback to _/docs/*.md_), run the following command:
 
 ```bash
 sudo docker run --rm -v $(pwd)/docs:/docs \
      ghcr.io/hellt/pymdownx-block-converter:0.1.0
 ```
 
+To volume mount a directory, but only execute against a single file:
+
+```bash
+sudo docker run --rm -v $(pwd)/docs:/docs \
+     ghcr.io/hellt/pymdownx-block-converter:0.1.0 /docs/path/to/test.md
+```
+
 ### Local Execution outside of container
 
-Local execution against a file:
+Local execution against a single file:
 
 ```bash
 python block_conv.py /path/to/test.md
@@ -71,8 +80,8 @@ Local execution against a directory (utilizes globbing):
 python block_conv.py /path/to/
 ```
 
-Running the script without a file or path argument runs against *.md in
-_/docs_ (to remain backwards compatible with the container's Dockerfile).
+Running the script without a file or path argument runs against _/docs/*.md_ in
+(to remain backwards compatible with the container's Dockerfile).
 
 ```bash
 python block_conv.py

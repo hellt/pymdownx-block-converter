@@ -50,7 +50,7 @@ To volume mount a specific file and fallback to pattern matching _/docs/*.md_:
 
 ```bash
 sudo docker run --rm -v $(pwd)/path/to/file.md:/docs/test.md \
-     ghcr.io/hellt/pymdownx-block-converter:0.1.0
+     ghcr.io/hellt/pymdownx-block-converter
 ```
 
 #### Container Volume Mount Directory
@@ -60,7 +60,7 @@ To convert the whole documentation base that is typically contained in the
 
 ```bash
 sudo docker run --rm -v $(pwd)/docs:/docs \
-     ghcr.io/hellt/pymdownx-block-converter:0.1.0
+     ghcr.io/hellt/pymdownx-block-converter
 ```
 
 #### Container Volume Mount Directory, but Only Execute on Single File
@@ -69,7 +69,7 @@ To volume mount a directory, but only execute against a single file:
 
 ```bash
 sudo docker run --rm -v $(pwd)/docs:/docs \
-     ghcr.io/hellt/pymdownx-block-converter:0.1.0 /docs/path/to/test.md
+     ghcr.io/hellt/pymdownx-block-converter /docs/path/to/test.md
 ```
 
 ### Local Execution outside of container

@@ -80,8 +80,6 @@ script.
 
 #### Local Execution on Single File
 
-#### Local Execution on Single File
-
 Local execution against a single file:
 
 ```bash

@@ -72,7 +72,10 @@ sudo docker run --rm -v $(pwd)/docs:/docs \
      ghcr.io/hellt/pymdownx-block-converter /docs/path/to/test.md
 ```
 
-### Local Execution outside of container
+### Local Execution without Container
+
+While there's nothing wrong with containers, it is possible to locally run the
+script.
 
 #### Local Execution on Single File
 

@@ -88,11 +88,11 @@ below) to convert Markdown blocks.
       This [creates a codespace](https://docs.github.com/en/codespaces/developing-in-a-codespace/creating-a-codespace-for-a-repository#creating-a-codespace-for-a-repository)
       with the default resources (currently 2 CPU, 8 GB RAM, 32 GB Storage).
 
-    * :rocket: Run block_conv on your Markdown file:
+   * :rocket: Run block_conv on your Markdown file:
 
-      ```bash
-      /app/block_conv.py /path/to/test.md
-      ```
+     ```bash
+     /app/block_conv.py /path/to/test.md
+     ```
 
 > [!IMPORTANT]
 > Keep in mind there are

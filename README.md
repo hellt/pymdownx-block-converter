@@ -36,34 +36,57 @@ just a single file.
 
 ## Usage
 
-It is always a good idea to first run the script against a single file to see if
-it works as expected.
-
-:sparkles: To do so, first determine whether to run the container or locally run
-the script:
+> [!IMPORTANT]
+> It is always a good idea to first run the script against a single file to see
+> if it works as expected.
+>
+> :sparkles: To do so, first determine whether to run the container or locally
+> run the script.
 
 ### Container
 
+#### Container Volume Mount Single File
+
+To volume mount a specific file and fallback to pattern matching _/docs/*.md_:
+
 ```bash
 sudo docker run --rm -v $(pwd)/path/to/file.md:/docs/test.md \
-     ghcr.io/hellt/pymdownx-block-converter:0.1.0
+     ghcr.io/hellt/pymdownx-block-converter
 ```
 
+#### Container Volume Mount Directory
+
 To convert the whole documentation base that is typically contained in the
-`docs` folder, run the following command:
+`docs` folder (uses fallback to _/docs/*.md_), run the following command:
 
 ```bash
 sudo docker run --rm -v $(pwd)/docs:/docs \
-     ghcr.io/hellt/pymdownx-block-converter:0.1.0
+     ghcr.io/hellt/pymdownx-block-converter
 ```
 
-### Local Execution outside of container
+#### Container Volume Mount Directory, but Only Execute on Single File
 
-Local execution against a file:
+To volume mount a directory, but only execute against a single file:
+
+```bash
+sudo docker run --rm -v $(pwd)/docs:/docs \
+     ghcr.io/hellt/pymdownx-block-converter /docs/path/to/test.md
+```
+
+### Local Execution without Container
+
+While there's nothing wrong with containers, it is possible to locally run the
+script.
+
+#### Local Execution on Single File
+
+Local execution against a single file:
 
 ```bash
 python block_conv.py /path/to/test.md
 ```
+
+#### Local Execution on Directory
 
 Local execution against a directory (utilizes globbing):
 
@@ -71,8 +94,11 @@ Local execution against a directory (utilizes globbing):
 python block_conv.py /path/to/
 ```
 
-Running the script without a file or path argument runs against *.md in
-_/docs_ (to remain backwards compatible with the container's Dockerfile).
+#### Local Execution using Fallback
+
+Running the script without a file or path argument fallsback and runs against
+_/docs/*.md_ in (to remain backwards compatible with the container's
+Dockerfile).
 
 ```bash
 python block_conv.py

@@ -12,6 +12,8 @@ class TestInvocation(unittest.TestCase):
 
         self.prog = "block_conv.py"
         self.path = "tests/invocation"
+
+        # yes, these test Markdown files are empty
         self.file_list = [
             f"{self.path}/one.md",
             f"{self.path}/two.md",

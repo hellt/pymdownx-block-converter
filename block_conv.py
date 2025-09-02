@@ -110,18 +110,33 @@ def update_tabs(content):
     return new_content.strip() + "\n"
 
 
-if __name__ == "__main__":
+def parse_args():
     try:
-        target = sys.argv[1]
+        return sys.argv[1]
+    # there's going to be an IndexError if no file/path argument was specified
+    except IndexError:
+        return None
 
+
+def enumerate_markdown_files(target, path="/docs"):
+    # if there was no argument in argv
+    if not target:
+        # backward compatible with initial container configuration
+        md_files = list(Path(path).glob("**/*.md"))
+    else:
         if Path(target).is_file():
             md_files = [Path(target)]
         # must be a directory, right?
         else:
             md_files = list(Path(target).glob("**/*.md"))
-    except IndexError:
-        # backward compatible with initial container configuration
-        md_files = list(Path("/docs").glob("**/*.md"))
+
+    return md_files
+
+
+if __name__ == "__main__":
+    target = parse_args()
+
+    md_files = enumerate_markdown_files(target)
 
     for md_file in md_files:
         content = md_file.read_text()

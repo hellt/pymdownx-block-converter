@@ -91,7 +91,7 @@ below) to convert Markdown blocks.
     * :rocket: Run block_conv on your Markdown file:
 
       ```bash
-      /app/block_conv.py path/to/test.md
+      /app/block_conv.py /path/to/test.md
       ```
 
 > [!IMPORTANT]

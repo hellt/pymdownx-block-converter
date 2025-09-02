@@ -118,7 +118,7 @@ def parse_args():
         return None
 
 
-def enumerate_markdown_files(target, path="/docs"):
+def enumerate_markdown_files(target, path="/work"):
     # if there was no argument in argv
     if not target:
         # backward compatible with initial container configuration

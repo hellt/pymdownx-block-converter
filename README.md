@@ -73,6 +73,34 @@ sudo docker run --rm -v $(pwd)/docs:/docs \
      ghcr.io/hellt/pymdownx-block-converter /docs/path/to/test.md
 ```
 
+#### GitHub Codespace Container
+
+Launch a GitHub :sparkles:[Codespace](https://docs.github.com/en/codespaces/overview)
+and use a [local execution method](#local-execution-without-container) (see
+below) to convert Markdown blocks.
+
+1. With the click of a button
+   * [![Launch in GitHub Codespaces](https://img.shields.io/badge/block_conv-Launch%20Codespace-238636?logo=github)](https://github.com/codespaces/new/hellt/pymdownx-block-converter?devcontainer_path=.devcontainer%2Fdevcontainer.json)
+1. Manual steps
+   * From this project's main page, click **Code**, then **Codespace**.
+   * Choose **Create codespace on \<branch_name\>**
+
+      This [creates a codespace](https://docs.github.com/en/codespaces/developing-in-a-codespace/creating-a-codespace-for-a-repository#creating-a-codespace-for-a-repository)
+      with the default resources (currently 2 CPU, 8 GB RAM, 32 GB Storage).
+
+    * :rocket: Run block_conv on your Markdown file:
+
+      ```bash
+      /app/block_conv.py path/to/test.md
+      ```
+
+> [!IMPORTANT]
+> Keep in mind there are
+> [monthly limits measured in core hours](https://docs.github.com/en/billing/managing-billing-for-your-products/managing-billing-for-github-codespaces/about-billing-for-github-codespaces#monthly-included-storage-and-core-hours-for-personal-accounts)
+> and to [stop your codespace](https://docs.github.com/en/codespaces/developing-in-a-codespace/stopping-and-starting-a-codespace)
+> :stop_sign: when you're not using it to conserve your monthly core hours
+> allowance.
+
 ### Local Execution without Container
 
 While there's nothing wrong with containers, it is possible to locally run the

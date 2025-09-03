@@ -119,7 +119,7 @@ def parse_args():
         return [None]
 
 
-def gather_markdown_files(targets, path="/docs"):
+def gather_markdown_files(targets, path="/work"):
     md_files = []
 
     # if there was no argument in argv

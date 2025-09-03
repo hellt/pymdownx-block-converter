@@ -112,7 +112,8 @@ def update_tabs(content):
 
 def parse_args():
     try:
-        return sys.argv[1]
+        # return paths if one or more files have been specified as arguments
+        return sys.argv[1:]
     # there's going to be an IndexError if no file/path argument was specified
     except IndexError:
         return None
@@ -136,9 +137,11 @@ def enumerate_markdown_files(target, path="/work"):
 if __name__ == "__main__":
     target = parse_args()
 
-    md_files = enumerate_markdown_files(target)
+    # enumerate/gather and flatten the lists into one
+    md_files = [file for t in target for file in enumerate_markdown_files(t)]
 
-    for md_file in md_files:
+    # remove duplicates and loop over the files
+    for md_file in set(md_files):
         content = md_file.read_text()
 
         content = update_admonition(content)

@@ -1,4 +1,3 @@
-from collections import Counter
 import unittest
 from unittest.mock import patch
 
@@ -53,9 +52,7 @@ class TestInvocation(unittest.TestCase):
             self.assertEqual(target, [])
 
             md_files = list(
-                block_conv.gather_markdown_files(
-                    target, path=self.path
-                )
+                block_conv.gather_markdown_files(target, path=self.path)
             )
 
             self.assertEqual(len(md_files), 3)
@@ -79,17 +76,20 @@ class TestInvocation(unittest.TestCase):
         Test the condition where multiple file and dir arguments are
         specified. Also tests for the removal of duplicates.
         """
-        files = [f"{self.path}/two.md", f"{self.path}"]
+        paths = [f"{self.path}/two.md", f"{self.path}", "tests/admonition"]
+        path_list = [
+            *self.file_list,
+            "tests/admonition/admonition.md",
+            "tests/admonition/admonition_expected.md",
+        ]
 
-        with patch("sys.argv", [self.prog, *files]):
+        with patch("sys.argv", [self.prog, *paths]):
             target = block_conv.parse_args()
 
-            # parse first target (single file)
             md_files = list(block_conv.gather_markdown_files(target))
-            self.assertEqual(len(md_files), 3)
+            self.assertEqual(len(md_files), 5)
             for m in md_files:
-                self.assertIn(str(m), self.file_list)
-
+                self.assertIn(str(m), path_list)
 
 
 if __name__ == "__main__":

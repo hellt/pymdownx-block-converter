@@ -116,32 +116,34 @@ def parse_args():
         return sys.argv[1:]
     # there's going to be an IndexError if no file/path argument was specified
     except IndexError:
-        return None
+        return [None]
 
 
-def enumerate_markdown_files(target, path="/work"):
+def gather_markdown_files(targets, path="/docs"):
+    md_files = []
+
     # if there was no argument in argv
-    if not target:
+    if not targets:
         # backward compatible with initial container configuration
-        md_files = list(Path(path).glob("**/*.md"))
+        md_files += list(Path(path).glob("**/*.md"))
     else:
-        if Path(target).is_file():
-            md_files = [Path(target)]
-        # must be a directory, right?
-        else:
-            md_files = list(Path(target).glob("**/*.md"))
+        for target in targets:
+            if Path(target).is_file():
+                md_files += [Path(target)]
+            # must be a directory, right?
+            else:
+                md_files += list(Path(target).glob("**/*.md"))
 
-    return md_files
+    # remove duplicates by type casting to a set
+    return set(md_files)
 
 
 if __name__ == "__main__":
-    target = parse_args()
+    targets = parse_args()
 
-    # enumerate/gather and flatten the lists into one
-    md_files = [file for t in target for file in enumerate_markdown_files(t)]
+    md_files = gather_markdown_files(targets)
 
-    # remove duplicates and loop over the files
-    for md_file in set(md_files):
+    for md_file in md_files:
         content = md_file.read_text()
 
         content = update_admonition(content)
